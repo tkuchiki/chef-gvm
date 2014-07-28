@@ -4,6 +4,7 @@ package "make"
 package "bison"
 package "gcc"
 package "glibc-devel"
+package "mercurial"
 
 gvm_installer_uri  = "https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer"
 file_cache_path    = Chef::Config[:file_cache_path]
