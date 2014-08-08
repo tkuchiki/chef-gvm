@@ -30,11 +30,26 @@ EOC
 end
 
 directory install_dir do
-  user  node[:gvm][:user]
-  group node[:gvm][:group]
+  user      node[:gvm][:user]
+  group     node[:gvm][:group]
   recursive true
 end
 
 file gvm_installer_path do
   action :delete
+end
+
+version = node[:gvm][:version]
+
+if version
+  bash "gvm install #{version}" do
+    code   "gvm install #{version}"
+    not_if { File.exists?("#{install_dir}/gos/#{version}") }
+  end
+
+  directory install_dir do
+    user      node[:gvm][:user]
+    group     node[:gvm][:group]
+    recursive true
+  end
 end
